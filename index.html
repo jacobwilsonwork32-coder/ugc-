@@ -24,6 +24,15 @@
   img{max-width:100%; display:block;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
 
+  /* INTRO VIDEO */
+  .intro{position:relative; width:100%; aspect-ratio:16/9; max-height:88vh; background:#0B1B33; overflow:hidden;}
+  .intro video{width:100%; height:100%; object-fit:cover; display:block;}
+  .intro::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,27,51,0) 70%, rgba(11,27,51,.5) 100%); pointer-events:none;}
+  .intro-scroll{position:absolute; left:50%; bottom:16px; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:4px; color:#fff; font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; letter-spacing:.14em; text-transform:uppercase; opacity:.9; animation:intro-bounce 2.2s ease-in-out infinite;}
+  .intro-scroll svg{width:16px; height:16px; stroke:#fff;}
+  @keyframes intro-bounce{0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);}}
+  @media(max-width:640px){.intro{aspect-ratio:16/9; max-height:60vh;} .intro-scroll{bottom:10px;}}
+
   /* NAV */
   header{position:sticky; top:0; background:var(--white); z-index:50; border-bottom:1px solid #eef1f6;}
   nav.wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
@@ -106,6 +115,9 @@
     .cat-track{gap:16px;}
     .cat-track .vcard{width:72vw; max-width:280px;}
     .cat-label{font-size:15.5px; padding:8px 18px;}
+    .vlogo{height:74px; padding:10px;}
+    .vlogo img{max-height:46px;}
+    .vlogo.text{font-size:14px; padding:10px 8px;}
   }
 
   /* TESTIMONIALS */
@@ -137,6 +149,16 @@
 </style>
 </head>
 <body>
+
+<section class="intro">
+  <video autoplay muted loop playsinline controls preload="auto">
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <div class="intro-scroll">
+    Scroll
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
 
 <header>
   <nav class="wrap">
@@ -271,9 +293,11 @@ const PORTFOLIO = [
  {v:'2a8f3da11b1474bb00e43c691d73898a', p:'9336ad2c926b251b6d527d89177ed2d7', cat:'Lifestyle', brand:'SYD', logo:'4bc7d247034a383a47ba03b912e9e60a.jpg'},
  {v:'fa0e325865cbab0f66f858d7279b1b91', p:'143dca10c529f87b5604a4325c56a87a', cat:'Lifestyle', brand:'AKT', logo:'632b5e0ae1b94dee17e7ef38192d8d6d.png'},
  {v:'e5b9936044c6e5a9af053d4568a60e99', p:'d132ba18892ce3b82be1f29c1a937aad', cat:'Lifestyle', brand:'Hard Hat', logo:'4efb7cd001f544353cda9a8a5fd4cb33.jpg'},
+ {v:'esky', src:'esky.mp4', cat:'Lifestyle', brand:'Esky', logoSrc:'esky-logo.png'},
  {v:'f02351d1a5dae8ee5bdf3a27c8e66e89', p:'e02dd9520927b71ca17987fbaf25e3b5', cat:'Food', brand:'Finn Poke', logo:'c09b74921ef8e1e7786d81fbb3369485.png'},
  {v:'260759b9fcddb46f3265560aa9b49bc1', p:'a8cfbff1c573e5579d13b7d2d4612784', cat:'Food', brand:'Chip N Mix', logo:'12de1bfca4651a4a72f3477204fc1b67.png'},
  {v:'4d500432ba90a92bb29279add9a312e9', p:'5e2aa4dc05fe2432340453a1e8e4c820', cat:'Food', brand:'Azul Mosman', logo:null},
+ {v:'tommy-panini', src:'tommy-panini.mp4', cat:'Food', brand:'Tommy Panini', logoSrc:'tommy-panini-logo.jpg'},
  {v:'585d3c4e239351ea4c60198974d6050f', p:'cde4ad87b8e76ddfe3edc883d0f67c24', cat:'Tech', brand:null, logo:'6f5d4e99265d2cf8dab0d747ce3faf4d.png'},
  {v:'5d43c4dbacc77d7def4aeddf99247260', p:'8b00402e22192c2e21b2209633d615b0', cat:'Tech', brand:'SL', logo:'5fa3b0dcf9030ae4becfc390df9e0a6c.jpg'},
  {v:'fa486c3bc1b72613ad14910feead0c8d', p:'5991cfc2a882d3d14ac91cf2144620cd', cat:'Tech', brand:'H', logo:'64c13db63431eaee096543c1813f00d8.png'},
@@ -299,15 +323,20 @@ function playIcon(){
 }
 
 function vlogoHtml(it){
+  if (it.logoSrc) return `<div class="vlogo"><img src="${it.logoSrc}" loading="lazy" alt="${it.brand}"></div>`;
   if (it.logo) return `<div class="vlogo"><img src="${BASE_M}${it.logo}" loading="lazy" alt="${it.brand || 'Client brand'}"></div>`;
   return `<div class="vlogo text">${it.brand || 'Client Partner'}</div>`;
 }
 
 function cardHtml(it){
+  // Self-hosted clips load their own first frame; Canva-hosted ones use a poster and load on click
+  const videoTag = it.src
+    ? `<video src="${it.src}#t=0.1" preload="metadata" playsinline controls></video>`
+    : `<video poster="${BASE_V}${it.p}.jpg" preload="none" playsinline controls></video>`;
   return `
     <div class="vcard" data-v="${it.v}">
       <div class="vphone">
-        <video poster="${BASE_V}${it.p}.jpg" preload="none" playsinline controls></video>
+        ${videoTag}
         <div class="playbtn">${playIcon()}</div>
       </div>
       ${vlogoHtml(it)}
