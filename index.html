@@ -47,7 +47,7 @@
   .hero{position:relative; isolation:isolate;}
   .hero-bg{position:absolute; inset:0; display:block; z-index:-2; background:var(--blue);}
   .hero-bg video{width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;}
-  .hero::before{content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(135deg, rgba(0,74,173,.78), rgba(0,40,110,.62));}
+  .hero::before{content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(135deg, rgba(0,74,173,.42), rgba(0,40,110,.28));}
   .hero{background:var(--blue); color:#fff; overflow:hidden;}
   .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:40px; padding:80px 32px;}
   .kicker{font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:13px; opacity:.75; margin-bottom:18px;}
@@ -124,11 +124,30 @@
     .vlogo.text{font-size:14px; padding:10px 8px;}
   }
 
+  /* RESULTS */
+  .results{padding:100px 0; background:#fff;}
+  .results-top{display:grid; grid-template-columns:1.25fr .75fr; gap:48px; align-items:center; margin-bottom:56px;}
+  .results h2{font-size:clamp(30px,4vw,44px); font-weight:800; color:var(--blue); margin-bottom:20px; line-height:1.1;}
+  .results p{font-size:17px; color:#2b3447; margin-bottom:16px;}
+  .results p strong{color:var(--blue);}
+  .r-stat{background:var(--blue); color:#fff; border-radius:24px; padding:40px 32px; text-align:center; box-shadow:0 24px 50px rgba(0,74,173,.25);}
+  .r-stat b{display:block; font-family:'Poppins',sans-serif; font-weight:900; font-size:clamp(54px,7vw,84px); line-height:1;}
+  .r-stat span{display:block; margin-top:12px; font-weight:600; opacity:.92; font-size:16px;}
+  .r-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .r-card{text-align:center;}
+  .r-card img{width:100%; aspect-ratio:9/16; object-fit:cover; object-position:top; display:block; border-radius:24px; border:7px solid #10131a; background:#10131a; box-shadow:0 18px 34px rgba(0,0,0,.18);}
+  .r-card .r-views{display:inline-block; margin-top:18px; font-family:'Poppins',sans-serif; font-weight:800; font-size:22px; color:var(--blue);}
+  .r-card .r-cap{display:block; margin-top:4px; font-size:14.5px; color:#5a6478; font-weight:500;}
+  .r-services{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0;}
+  .r-services span{background:var(--blue-light); color:var(--blue); font-weight:700; font-size:14px; padding:8px 16px; border-radius:100px;}
+  @media(max-width:860px){ .results-top{grid-template-columns:1fr; gap:32px;} }
+  @media(max-width:640px){ .results{padding:64px 0;} .r-grid{grid-template-columns:1fr; gap:36px; max-width:300px; margin:0 auto;} }
+
   /* TESTIMONIALS */
   .testimonials{position:relative; isolation:isolate; overflow:hidden; background:var(--blue); color:#fff; padding:100px 0;}
   .t-bg{position:absolute; inset:0; z-index:-2;}
   .t-bg video{width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;}
-  .testimonials::before{content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(0,34,96,.80), rgba(0,52,130,.72));}
+  .testimonials::before{content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(0,34,96,.50), rgba(0,52,130,.40));}
   .testimonials h2{font-size:clamp(30px,4vw,44px); font-weight:800; margin-bottom:44px;}
   .t-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;}
   .t-card{background:rgba(255,255,255,.12); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.18); border-radius:20px; padding:28px;}
@@ -173,6 +192,7 @@
     <div class="navlinks">
       <a href="#home">Home</a>
       <a href="#about">About Me</a>
+      <a href="#results">Results</a>
       <a href="#feedback">Feedback</a>
       <a href="#contact">Contact</a>
     </div>
@@ -247,6 +267,26 @@
   </div>
 </section>
 
+<section class="results" id="results">
+  <div class="wrap">
+    <div class="results-top">
+      <div>
+        <div class="eyebrow">Results</div>
+        <h2>Videos that actually work.</h2>
+        <p>I don't just make good looking videos, I make videos that <strong>get watched, shared and bring people through your door</strong>. With scroll stopping hooks, real on location storytelling and a clear reason to visit, my content has put brands in front of <strong>tens of thousands of real people</strong>, turning views into foot traffic for stores, cafés and events.</p>
+        <p>I also create <strong>monthly content for brands and run their social media</strong>, so you stay consistent, visible and top of mind without lifting a finger.</p>
+        <div class="r-services"><span>Monthly content</span><span>Social media management</span><span>Store &amp; local business focus</span></div>
+      </div>
+      <div class="r-stat"><b>181K+</b><span>views across just these 3 videos</span></div>
+    </div>
+    <div class="r-grid">
+      <div class="r-card"><img src="results-1.jpg" loading="lazy" alt="Plant nursery video, 106K views"><span class="r-views">106K views</span><span class="r-cap">Plant nursery walkthrough</span></div>
+      <div class="r-card"><img src="results-2.jpg" loading="lazy" alt="Fairy garden workshop video, 40.3K views"><span class="r-views">40.3K views</span><span class="r-cap">Fairy Garden Workshop promo</span></div>
+      <div class="r-card"><img src="results-3.jpg" loading="lazy" alt="Northern Beaches lunch spot video, 34.7K views"><span class="r-views">34.7K views</span><span class="r-cap">Northern Beaches lunch spot</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="testimonials" id="feedback">
   <div class="t-bg" aria-hidden="true">
     <video src="hero-1.mp4" autoplay muted loop playsinline preload="metadata"></video>
@@ -254,11 +294,11 @@
   <div class="wrap">
     <h2>Client Feedback</h2>
     <div class="t-grid">
-      <div class="t-card"><p>"Amazing, exactly the kind of UGC content we were looking for. Jacob understood the brief perfectly and produced exactly what we were hoping for. Easy to work with, quick delivery and very high quality, authentic videos. We will be back for more."</p><span>— Big Sky Goods</span></div>
-      <div class="t-card"><p>"Great work, with fast speed and great content. He was so polite and professional, hopefully in the future it will be possible to work together again!"</p><span>— FrameN8</span></div>
-      <div class="t-card"><p>"Really happy with Jacob's work. Very natural and authentic on camera and nailed the brief. Would book again!"</p><span>— Horizon Bank</span></div>
-      <div class="t-card"><p>"Yay! Thanks so much Jacob! We love it. Appreciate it. We will keep in touch regarding future paid work :)"</p><span>— TFB Team</span></div>
-      <div class="t-card"><p>"Jacob is a superstar, definitely looking forward to working together again in the near future!"</p><span>— ausocialcreator</span></div>
+      <div class="t-card"><p>"Amazing, exactly the kind of UGC content we were looking for. Jacob understood the brief perfectly and produced exactly what we were hoping for. Easy to work with, quick delivery and very high quality, authentic videos. We will be back for more."</p><span>Big Sky Goods</span></div>
+      <div class="t-card"><p>"Great work, with fast speed and great content. He was so polite and professional, hopefully in the future it will be possible to work together again!"</p><span>FrameN8</span></div>
+      <div class="t-card"><p>"Really happy with Jacob's work. Very natural and authentic on camera and nailed the brief. Would book again!"</p><span>Horizon Bank</span></div>
+      <div class="t-card"><p>"Yay! Thanks so much Jacob! We love it. Appreciate it. We will keep in touch regarding future paid work :)"</p><span>TFB Team</span></div>
+      <div class="t-card"><p>"Jacob is a superstar, definitely looking forward to working together again in the near future!"</p><span>ausocialcreator</span></div>
     </div>
   </div>
 </section>
